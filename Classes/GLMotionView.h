@@ -1,6 +1,6 @@
 /*
 
-File: GLGravityView.h
+File: GLMotionView.h
 Abstract: This class wraps the CAEAGLLayer from CoreAnimation into a convenient
 UIView subclass. The view content is basically an EAGL surface you render your
 OpenGL scene into.  Note that setting the view non-opaque will only work if the
@@ -53,7 +53,7 @@ Copyright (C) 2009 Apple Inc. All Rights Reserved.
 #import <OpenGLES/ES1/gl.h>
 #import <OpenGLES/ES1/glext.h>
 
-@interface GLGravityView : UIView
+@interface GLMotionView : UIView
 {
 @private
 	// The pixel dimensions of the backbuffer

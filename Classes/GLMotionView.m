@@ -1,6 +1,6 @@
 /*
 
-File: GLGravityView.m
+File: GLMotionView.m
 Abstract: This class wraps the CAEAGLLayer from CoreAnimation into a convenient
 UIView subclass. The view content is basically an EAGL surface you render your
 OpenGL scene into.  Note that setting the view non-opaque will only work if the
@@ -51,7 +51,7 @@ Copyright (C) 2009 Apple Inc. All Rights Reserved.
 #import <QuartzCore/QuartzCore.h>
 #import <OpenGLES/EAGLDrawable.h>
 
-#import "GLGravityView.h"
+#import "GLMotionView.h"
 #import "teapot.h"
 
 // CONSTANTS
@@ -61,7 +61,7 @@ Copyright (C) 2009 Apple Inc. All Rights Reserved.
 #define DEGREES_TO_RADIANS(__ANGLE__) ((__ANGLE__) / 180.0 * M_PI)
 
 // A class extension to declare private methods
-@interface GLGravityView (private)
+@interface GLMotionView (private)
 
 - (BOOL)createFramebuffer;
 - (void)destroyFramebuffer;
@@ -69,7 +69,7 @@ Copyright (C) 2009 Apple Inc. All Rights Reserved.
 
 @end
 
-@implementation GLGravityView
+@implementation GLMotionView
 
 @synthesize animating;
 @dynamic animationFrameInterval;

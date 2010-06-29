@@ -1,10 +1,10 @@
 /*
  
- File: GLGravityAppDelegate.h
+ File: GLMotionAppDelegate.m
  
- Abstract: The GLGravityAppDelegate class is the app delegate that ties 
+ Abstract: The GLMotionAppDelegate class is the app delegate that ties 
  everything together. It updates the acceletometer values used to draw 
- OpenGL content in the GLGravityView class.
+ OpenGL content in the GLMotionView class.
  
  Version: 2.1
  
@@ -48,18 +48,59 @@
  
 */
 
-#import <UIKit/UIKit.h>
+#import "GLMotionAppDelegate.h"
+#import "GLMotionView.h"
 
-@class GLGravityView;
+// CONSTANTS
+#define kAccelerometerFrequency		100.0 // Hz
+#define kFilteringFactor			0.1
 
-@interface GLGravityAppDelegate : NSObject <UIApplicationDelegate, UIAccelerometerDelegate> {
-    UIWindow *window;
-    GLGravityView *glView;
-	UIAccelerationValue accel[3];
+@implementation GLMotionAppDelegate
+
+@synthesize window;
+@synthesize glView;
+
+- (void) applicationDidFinishLaunching:(UIApplication *)application
+{
+	[glView startAnimation];
+	
+	//Configure and start accelerometer
+	[[UIAccelerometer sharedAccelerometer] setUpdateInterval:(1.0 / kAccelerometerFrequency)];
+	[[UIAccelerometer sharedAccelerometer] setDelegate:self];	
 }
 
-@property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (nonatomic, retain) IBOutlet GLGravityView *glView;
+- (void) applicationWillResignActive:(UIApplication *)application
+{
+	[glView stopAnimation];
+}
+
+- (void) applicationDidBecomeActive:(UIApplication *)application
+{
+	[glView startAnimation];
+}
+
+- (void)applicationWillTerminate:(UIApplication *)application
+{
+	[glView stopAnimation];
+}
+
+- (void) dealloc
+{
+	[window release];
+	[glView release];
+	
+	[super dealloc];
+}
+
+- (void)accelerometer:(UIAccelerometer*)accelerometer didAccelerate:(UIAcceleration*)acceleration
+{
+	//Use a basic low-pass filter to only keep the gravity in the accelerometer values
+	accel[0] = acceleration.x * kFilteringFactor + accel[0] * (1.0 - kFilteringFactor);
+	accel[1] = acceleration.y * kFilteringFactor + accel[1] * (1.0 - kFilteringFactor);
+	accel[2] = acceleration.z * kFilteringFactor + accel[2] * (1.0 - kFilteringFactor);
+	
+	//Update the accelerometer values for the view
+	[glView setAccel:accel];
+}
 
 @end
-

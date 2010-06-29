@@ -15,8 +15,8 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		2D500B940D5A79C200DBA0E3 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D500B920D5A79C200DBA0E3 /* OpenGLES.framework */; };
 		2D500B9A0D5A79CF00DBA0E3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D500B990D5A79CF00DBA0E3 /* QuartzCore.framework */; };
-		63E8ED9F0E1ACA88004D3662 /* GLGravityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E8ED9D0E1ACA88004D3662 /* GLGravityView.m */; };
-		AF85818310643D940004D36B /* GLGravityAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF85818210643D940004D36B /* GLGravityAppDelegate.m */; };
+		63E8ED9F0E1ACA88004D3662 /* GLMotionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E8ED9D0E1ACA88004D3662 /* GLMotionView.m */; };
+		AF85818310643D940004D36B /* GLMotionAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF85818210643D940004D36B /* GLMotionAppDelegate.m */; };
 		AF85846C10646AA20004D36B /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF85846B10646AA20004D36B /* MainWindow.xib */; };
 /* End PBXBuildFile section */
 
@@ -26,18 +26,18 @@
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623EB0D0F72F000981E51 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		1D4F2F990D10AC310045FB13 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		1D6058910D05DD3D006BFB54 /* GLGravity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GLGravity.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D6058910D05DD3D006BFB54 /* GLMotion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GLMotion.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2D500B920D5A79C200DBA0E3 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		2D500B990D5A79CF00DBA0E3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		32CA4F630368D1EE00C91783 /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
 		63A452D60E0877A900AA59DC /* teapot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = teapot.h; path = Models/teapot.h; sourceTree = "<group>"; };
-		63E8ED9D0E1ACA88004D3662 /* GLGravityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GLGravityView.m; path = Classes/GLGravityView.m; sourceTree = "<group>"; };
-		63E8ED9E0E1ACA88004D3662 /* GLGravityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GLGravityView.h; path = Classes/GLGravityView.h; sourceTree = "<group>"; };
+		63E8ED9D0E1ACA88004D3662 /* GLMotionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GLMotionView.m; path = Classes/GLMotionView.m; sourceTree = "<group>"; };
+		63E8ED9E0E1ACA88004D3662 /* GLMotionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GLMotionView.h; path = Classes/GLMotionView.h; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AF85818110643D940004D36B /* GLGravityAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GLGravityAppDelegate.h; path = Classes/GLGravityAppDelegate.h; sourceTree = "<group>"; };
-		AF85818210643D940004D36B /* GLGravityAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GLGravityAppDelegate.m; path = Classes/GLGravityAppDelegate.m; sourceTree = "<group>"; };
+		AF85818110643D940004D36B /* GLMotionAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GLMotionAppDelegate.h; path = Classes/GLMotionAppDelegate.h; sourceTree = "<group>"; };
+		AF85818210643D940004D36B /* GLMotionAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GLMotionAppDelegate.m; path = Classes/GLMotionAppDelegate.m; sourceTree = "<group>"; };
 		AF85846B10646AA20004D36B /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -60,7 +60,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1D6058910D05DD3D006BFB54 /* GLGravity.app */,
+				1D6058910D05DD3D006BFB54 /* GLMotion.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -114,10 +114,10 @@
 		2D500B1D0D5A766B00DBA0E3 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				AF85818110643D940004D36B /* GLGravityAppDelegate.h */,
-				AF85818210643D940004D36B /* GLGravityAppDelegate.m */,
-				63E8ED9E0E1ACA88004D3662 /* GLGravityView.h */,
-				63E8ED9D0E1ACA88004D3662 /* GLGravityView.m */,
+				AF85818110643D940004D36B /* GLMotionAppDelegate.h */,
+				AF85818210643D940004D36B /* GLMotionAppDelegate.m */,
+				63E8ED9E0E1ACA88004D3662 /* GLMotionView.h */,
+				63E8ED9D0E1ACA88004D3662 /* GLMotionView.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -133,9 +133,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1D6058900D05DD3D006BFB54 /* GLGravity */ = {
+		1D6058900D05DD3D006BFB54 /* GLMotion */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "GLGravity" */;
+			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "GLMotion" */;
 			buildPhases = (
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
@@ -145,9 +145,9 @@
 			);
 			dependencies = (
 			);
-			name = GLGravity;
+			name = GLMotion;
 			productName = foo;
-			productReference = 1D6058910D05DD3D006BFB54 /* GLGravity.app */;
+			productReference = 1D6058910D05DD3D006BFB54 /* GLMotion.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -155,14 +155,14 @@
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
-			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "GLGravity" */;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "GLMotion" */;
 			compatibilityVersion = "Xcode 3.1";
 			hasScannedForEncodings = 1;
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1D6058900D05DD3D006BFB54 /* GLGravity */,
+				1D6058900D05DD3D006BFB54 /* GLMotion */,
 			);
 		};
 /* End PBXProject section */
@@ -186,8 +186,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
-				63E8ED9F0E1ACA88004D3662 /* GLGravityView.m in Sources */,
-				AF85818310643D940004D36B /* GLGravityAppDelegate.m in Sources */,
+				63E8ED9F0E1ACA88004D3662 /* GLMotionView.m in Sources */,
+				AF85818310643D940004D36B /* GLMotionAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,7 +207,7 @@
 				GCC_PREFIX_HEADER = Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				PREBINDING = NO;
-				PRODUCT_NAME = GLGravity;
+				PRODUCT_NAME = GLMotion;
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Debug;
@@ -223,7 +223,7 @@
 				GCC_PREFIX_HEADER = Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				PREBINDING = NO;
-				PRODUCT_NAME = GLGravity;
+				PRODUCT_NAME = GLMotion;
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Release;
@@ -260,7 +260,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "GLGravity" */ = {
+		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "GLMotion" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
@@ -269,7 +269,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "GLGravity" */ = {
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "GLMotion" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
