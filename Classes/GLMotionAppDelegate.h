@@ -55,7 +55,6 @@
 @interface GLMotionAppDelegate : NSObject <UIApplicationDelegate, UIAccelerometerDelegate> {
     UIWindow *window;
     GLMotionView *glView;
-	UIAccelerationValue accel[3];
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;

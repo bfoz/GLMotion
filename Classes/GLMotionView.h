@@ -52,6 +52,7 @@ Copyright (C) 2009 Apple Inc. All Rights Reserved.
 #import <OpenGLES/EAGL.h>
 #import <OpenGLES/ES1/gl.h>
 #import <OpenGLES/ES1/glext.h>
+#import <CoreMotion/CoreMotion.h>
 
 @interface GLMotionView : UIView
 {
@@ -78,13 +79,11 @@ Copyright (C) 2009 Apple Inc. All Rights Reserved.
 	id displayLink;
     NSTimer *animationTimer;
 	
-	UIAccelerationValue	*accel;
+    CMMotionManager* motionManager;
 }
 
 @property (readonly, nonatomic, getter=isAnimating) BOOL animating;
 @property (nonatomic) NSInteger animationFrameInterval;
-
-@property (nonatomic) UIAccelerationValue *accel;
 
 -(void)startAnimation;
 -(void)stopAnimation;

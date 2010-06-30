@@ -73,7 +73,6 @@ Copyright (C) 2009 Apple Inc. All Rights Reserved.
 
 @synthesize animating;
 @dynamic animationFrameInterval;
-@synthesize accel;
 
 // Implement this to override the default layer class (which is [CALayer class]).
 // We do this so that our view will be backed by a layer that is capable of OpenGL ES rendering.
@@ -111,9 +110,7 @@ Copyright (C) 2009 Apple Inc. All Rights Reserved.
 		NSString *currSysVer = [[UIDevice currentDevice] systemVersion];
 		if ([currSysVer compare:reqSysVer options:NSNumericSearch] != NSOrderedAscending)
 			displayLinkSupported = TRUE;
-		
-		accel = calloc(3, sizeof(UIAccelerationValue));
-		
+
 		[self setupView];
 	}
 	
@@ -175,60 +172,37 @@ Copyright (C) 2009 Apple Inc. All Rights Reserved.
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
-	GLfloat matrix[4][4], length;
+	GLfloat matrix[4][4];
 		
-	//Make sure we have a big enough acceleration vector
-	length = sqrtf(accel[0] * accel[0] + accel[1] * accel[1] + accel[2] * accel[2]);
-		
-	//Setup model view matrix
-	glLoadIdentity();
-	glTranslatef(0.0, -0.1, -1.0);
-	glScalef(kTeapotScale, kTeapotScale, kTeapotScale);
-		
-	if(length >= 0.1)
-	{
-		//Clear matrix to be used to rotate from the current referential to one based on the gravity vector
-		bzero(matrix, sizeof(matrix));
-		matrix[3][3] = 1.0;
-		
-		//Setup first matrix column as gravity vector
-		matrix[0][0] = accel[0] / length;
-		matrix[0][1] = accel[1] / length;
-		matrix[0][2] = accel[2] / length;
-			
-		//Setup second matrix column as an arbitrary vector in the plane perpendicular to the gravity vector {Gx, Gy, Gz} defined by by the equation "Gx * x + Gy * y + Gz * z = 0" in which we arbitrarily set x=0 and y=1
-		matrix[1][0] = 0.0;
-		matrix[1][1] = 1.0;
-		matrix[1][2] = -accel[1] / accel[2];
-		length = sqrtf(matrix[1][0] * matrix[1][0] + matrix[1][1] * matrix[1][1] + matrix[1][2] * matrix[1][2]);
-		matrix[1][0] /= length;
-		matrix[1][1] /= length;
-		matrix[1][2] /= length;
-		
-		//Setup third matrix column as the cross product of the first two
-		matrix[2][0] = matrix[0][1] * matrix[1][2] - matrix[0][2] * matrix[1][1];
-		matrix[2][1] = matrix[1][0] * matrix[0][2] - matrix[1][2] * matrix[0][0];
-		matrix[2][2] = matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
-		
-		//Finally load matrix
-		glMultMatrixf((GLfloat*)matrix);
-		
-		// Rotate a bit more so that its where we want it.
-		glRotatef(90.0, 0.0, 0.0, 1.0);
-	}
-	// If we're in the simulator we'd like to do something more interesting than just sit there
-	// But if we're on a device, we want to just let the accelerometer do the work for us without a fallback.
-#if TARGET_IPHONE_SIMULATOR
-	else
-	{
-		static GLfloat spinX = 0.0, spinY = 0.0;
-		glRotatef(spinX, 0.0, 0.0, 1.0);
-		glRotatef(spinY, 0.0, 1.0, 0.0);
-		glRotatef(90.0, 1.0, 0.0, 0.0);
-		spinX += 1.0;
-		spinY += 0.25;
-	}
-#endif
+
+    //Setup model view matrix
+    glLoadIdentity();
+    glTranslatef(0.0, -0.1, -1.0);
+    glScalef(kTeapotScale, kTeapotScale, kTeapotScale);
+
+    // Get the current attitude's rotation matrix
+    CMRotationMatrix rotation = motionManager.deviceMotion.attitude.rotationMatrix;
+
+    //Clear matrix to be used to rotate from the current referential to one based on the gravity vector
+    bzero(matrix, sizeof(matrix));
+    matrix[3][3] = 1.0;
+
+    // Copy the attitude rotation matrix
+    matrix[0][0] = rotation.m11;
+    matrix[0][1] = rotation.m21;
+    matrix[0][2] = rotation.m31;
+
+    matrix[1][0] = rotation.m12;
+    matrix[1][1] = rotation.m22;
+    matrix[1][2] = rotation.m32;
+
+    matrix[2][0] = rotation.m13;
+    matrix[2][1] = rotation.m23;
+    matrix[2][2] = rotation.m33;
+
+    // Multiply the attitude rotation matrix into the model view matrix
+    glMultMatrixf((GLfloat*)matrix);
+    glRotatef(90.0, 1.0, 0.0, 0.0);
 		
 	// Draw teapot. The new_teapot_indicies array is an RLE (run-length encoded) version of the teapot_indices array in teapot.h
 	for(int i = 0; i < num_teapot_indices; i += new_teapot_indicies[i] + 1)
@@ -341,6 +315,13 @@ Copyright (C) 2009 Apple Inc. All Rights Reserved.
 		
 		animating = TRUE;
 	}
+
+    if( !motionManager )
+    {
+	motionManager = [[CMMotionManager alloc] init];
+	if( motionManager.deviceMotionAvailable )
+	    [motionManager startDeviceMotionUpdates];
+    }
 }
 
 - (void)stopAnimation
@@ -360,12 +341,13 @@ Copyright (C) 2009 Apple Inc. All Rights Reserved.
 		
 		animating = FALSE;
 	}
+
+    if( motionManager.deviceMotionActive )
+	[motionManager stopDeviceMotionUpdates];
 }
 
 - (void)dealloc
 {
-	free(accel);
-	
 	if([EAGLContext currentContext] == context)
 	{
 		[EAGLContext setCurrentContext:nil];
