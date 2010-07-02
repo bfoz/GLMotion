@@ -343,7 +343,11 @@ Copyright (C) 2009 Apple Inc. All Rights Reserved.
 	}
 
     if( motionManager.deviceMotionActive )
+    {
 	[motionManager stopDeviceMotionUpdates];
+	[motionManager release];
+	motionManager = nil;
+    }
 }
 
 - (void)dealloc
