@@ -85,19 +85,6 @@ Copyright (C) 2009 Apple Inc. All Rights Reserved.
 - (id)initWithCoder:(NSCoder*)coder {
     
     if ((self = [super initWithCoder:coder])) {
-		CAEAGLLayer *eaglLayer = (CAEAGLLayer *)self.layer;
-	
-		eaglLayer.opaque = YES;
-		eaglLayer.drawableProperties = [NSDictionary dictionaryWithObjectsAndKeys:
-									[NSNumber numberWithBool:NO], kEAGLDrawablePropertyRetainedBacking, kEAGLColorFormatRGBA8, kEAGLDrawablePropertyColorFormat, nil];
-	
-		context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES1];
-	
-		if (!context || ![EAGLContext setCurrentContext:context]) {
-			[self release];
-			return nil;
-		}
-	
 		animating = FALSE;
 		displayLinkSupported = FALSE;
 		animationFrameInterval = 1;
@@ -110,8 +97,6 @@ Copyright (C) 2009 Apple Inc. All Rights Reserved.
 		NSString *currSysVer = [[UIDevice currentDevice] systemVersion];
 		if ([currSysVer compare:reqSysVer options:NSNumericSearch] != NSOrderedAscending)
 			displayLinkSupported = TRUE;
-
-		[self setupView];
 	}
 	
 	return self;
@@ -298,6 +283,22 @@ Copyright (C) 2009 Apple Inc. All Rights Reserved.
 
 - (void) startAnimation
 {
+    if( !context )
+    {
+	CAEAGLLayer *eaglLayer = (CAEAGLLayer *)self.layer;
+
+	eaglLayer.opaque = YES;
+	eaglLayer.drawableProperties = [NSDictionary dictionaryWithObjectsAndKeys:
+					[NSNumber numberWithBool:NO], kEAGLDrawablePropertyRetainedBacking, kEAGLColorFormatRGBA8, kEAGLDrawablePropertyColorFormat, nil];
+
+	context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES1];
+
+	if (!context || ![EAGLContext setCurrentContext:context])
+	    return;
+
+	[self setupView];
+    }
+
 	if (!animating)
 	{
 		if (displayLinkSupported)
@@ -342,6 +343,11 @@ Copyright (C) 2009 Apple Inc. All Rights Reserved.
 		animating = FALSE;
 	}
 
+    if([EAGLContext currentContext] == context)
+	[EAGLContext setCurrentContext:nil];
+    [context release];
+    context = nil;
+
     if( motionManager.deviceMotionActive )
     {
 	[motionManager stopDeviceMotionUpdates];
@@ -352,12 +358,6 @@ Copyright (C) 2009 Apple Inc. All Rights Reserved.
 
 - (void)dealloc
 {
-	if([EAGLContext currentContext] == context)
-	{
-		[EAGLContext setCurrentContext:nil];
-	}
-	
-	[context release];
 	[super dealloc];
 }
 
