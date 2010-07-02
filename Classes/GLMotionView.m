@@ -315,6 +315,7 @@ Copyright (C) 2009 Apple Inc. All Rights Reserved.
 			animationTimer = [NSTimer scheduledTimerWithTimeInterval:(NSTimeInterval)((1.0 / 60.0) * animationFrameInterval) target:self selector:@selector(drawView) userInfo:nil repeats:TRUE];
 		
 		animating = TRUE;
+	    [self createFramebuffer];
 	}
 
     if( !motionManager )
